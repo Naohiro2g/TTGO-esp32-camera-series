@@ -45,7 +45,7 @@ static ra_filter_t *ra_filter_init(ra_filter_t *filter, size_t sample_size)
 
     filter->values = (int *)malloc(sample_size * sizeof(int));
     if (!filter->values) {
-        free(filter);
+//        free(filter);
         return NULL;
     }
     memset(filter->values, 0, sample_size * sizeof(int));
@@ -203,7 +203,7 @@ static esp_err_t stream_hmi_handler(httpd_req_t *req)
     esp_err_t res = ESP_OK;
     size_t _jpg_buf_len = 0;
     uint8_t *_jpg_buf = NULL;
-    char *part_buf[64];
+    //char *part_buf[64];
 
     static int64_t last_frame = 0;
     if (!last_frame) {
@@ -439,7 +439,7 @@ void startCameraServer()
     };
 
     ra_filter_init(&ra_filter, 20);
-    Serial.printf("Starting web server on port: '%d'", config.server_port);
+    Serial.printf("Starting web server on port: '%d'\n", config.server_port);
     if (httpd_start(&camera_httpd, &config) == ESP_OK) {
         httpd_register_uri_handler(camera_httpd, &index_uri);
         httpd_register_uri_handler(camera_httpd, &cmd_uri);
@@ -449,7 +449,7 @@ void startCameraServer()
 
     config.server_port += 1;
     config.ctrl_port += 1;
-    Serial.printf("Starting stream server on port: '%d'", config.server_port);
+    Serial.printf("Starting stream server on port: '%d'\n", config.server_port);
     if (httpd_start(&stream_httpd, &config) == ESP_OK) {
         httpd_register_uri_handler(stream_httpd, &stream_uri);
         httpd_register_uri_handler(stream_httpd, &hmi_uri);
