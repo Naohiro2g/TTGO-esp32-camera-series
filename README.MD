@@ -1,3 +1,6 @@
+For my Microphone-Version, I added the mDNS or avahi/bonjour/zeroconf suport so that you can connect to the camera server by name.
+
+
 TTGO-Camera-Series
 =====================
 
